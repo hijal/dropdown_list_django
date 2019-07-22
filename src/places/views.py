@@ -1,6 +1,4 @@
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView, UpdateView
-from django.urls import reverse_lazy
 
 from .models import Location, City, Place
 from .forms import PersonForm
