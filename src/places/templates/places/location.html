@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <form method="POST" id="personForm" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
+    {% csrf_token %}
+    <table>
+      {{ form.as_p }}
+    </table>
+    <button type="submit">Save</button>
+
+  </form>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script>
+    $("#id_city").change(function () {
+      var url = $("#personForm").attr("data-cities-url");
+      var cityId = $(this).val();
+
+      $.ajax({
+        url: url,
+        data: {
+          'city': cityId
+        },
+        success: function (data) {
+          $("#id_place").html(data);
+        }
+      });
+
+    });
+  </script>
+{% endblock %}
